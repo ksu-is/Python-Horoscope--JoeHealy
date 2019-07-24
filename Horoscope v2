@@ -22,4 +22,4 @@ json = str(response.read())
 begin = json.find('bg sign-color"></i>')
 end = json.find('</p>')
 
-print(json[begin + 28:end])
+print(json[begin + 28:end], 'Have a nice day!')
