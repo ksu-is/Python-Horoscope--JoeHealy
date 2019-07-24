@@ -1,0 +1,34 @@
+import urllib.request
+import urllib
+import os
+
+#integer for later verification of the horoscope sign
+horoscope_sign = 0
+
+print('Enter a horoscope sign')
+
+#checks if the horoscope sign is one of the possible
+while horoscope_sign not in ('aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'):
+	#enter a wanted horoscope sign
+	horoscope_sign = input()
+
+	#print a message if the horoscope sign is not accurate
+	if horoscope_sign not in ('aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'):
+		print('Your horoscope sign is not one of them: aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces. Enter a valid zodiak sign.')
+
+#a horoscope page
+url = 'https://www.astrology.com/horoscope/daily/{}.html'.format(horoscope_sign)
+
+#joins the page
+response = urllib.request.urlopen(url)
+
+#takes the content of the page as a string
+json = str(response.read())
+
+#get the starting index of text
+begin = json.find('bg sign-color"></i>')
+#get the last text index
+end = json.find('</p>')
+
+#prints the text
+print(json[begin + 28:end])
